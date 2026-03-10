@@ -1,4 +1,5 @@
-#include <stdio.h>
+typedef unsigned long	size_t;
+typedef long	off_t;
 
 void	*fake_mmap(void *addr, size_t length, int prot, int flags, int fd, off_t offset)
 {
@@ -49,7 +50,7 @@ int	main(void)
 	char	*str = "Hello, World!\n";
 	char	*ptr;
 
-	ptr = fake_mmap(NULL, 0x1000, 0x7, 0x22, -1, 0);
+	ptr = fake_mmap(0, 0x1000, 0x7, 0x22, -1, 0);
 	for (int i = 0; i < 14; i++)
 		ptr[i] = str[i];
 	fake_write(1, ptr, 14);
